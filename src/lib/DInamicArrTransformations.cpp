@@ -17,27 +17,25 @@ void printArray(int* arr, int size)
     }
 }
 
-int** genRandMatrix(int size, int maxValue, int cols)
+int** genRandMatrix(int size, int maxValue)
 {
-    int** matrix = new int*[size];
-    for (int i = 0; i < size; i++) {
-        matrix[i] = new int[cols];
-    }
-
-    for (int i = 0; i < size; i++) {
-        for (int j = 0; j < cols; j++) {
+    int** matrix = new int*[size + 1];
+    for (int i = 0; i < size + 1; i++) {
+        int los = rand() % 10 + 1;
+        matrix[i] = new int[los];
+        matrix[i][0] = los - 1;
+        for (int j = 1; j < los; j++)
             matrix[i][j] = rand() % maxValue;
-        }
     }
     return matrix;
 }
 
-void printMatrix(int** matrix, int size, int cols)
+void printMatrix(int** matrix, int size)
 {
     std::cout << size << ": ";
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < size + 1; i++) {
         std::cout << "\n";
-        for (int j = 0; j < cols; j++) {
+        for (int j = 0; j < matrix[i][0]+1; j++) {
             std::cout << std::setw(5) << matrix[i][j];
         }
     }

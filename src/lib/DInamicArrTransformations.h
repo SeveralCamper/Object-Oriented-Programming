@@ -8,8 +8,8 @@ int* genRandArray(int size, int maxValue);
 
 void printArray(int* arr, int size);
 
-int** genRandMatrix(int size, int maxValue, int cols);
+int** genRandMatrix(int size, int maxValue);
 
-void printMatrix(int** matrix, int size, int cols);
+void printMatrix(int** matrix, int size);
 
 #endif

@@ -12,10 +12,9 @@ int main()
     std::cout << "\n";
 
     std::cout << "Second ex. - Dinamic Matrix\n";
-    size = rand() % 10;
-    int cols = rand() % 10;
-    int** matrix = genRandMatrix(size, maxValue, cols);
-    printMatrix(matrix, size, cols);
+    size = rand() % 10 + 1;
+    int** matrix = genRandMatrix(size, maxValue);
+    printMatrix(matrix, size);
     for (int i = 0; i < size; i++) {
         delete[] matrix[i];
     }
