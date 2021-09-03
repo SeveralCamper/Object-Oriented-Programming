@@ -1,11 +1,11 @@
 #include <iostream>
-#include <SelectSort.h>
+#include <DInamicArrTransformations.h>
 
 int main ()
 {   	
-    int MassLength = 1000;
-    int Massive[MassLength];
-    FillRand(Massive,MassLength,50,500);
-    SelectSort(Massive,MassLength);
-    PrintMas(Massive,MassLength);
+    int size = rand()%10;
+    int maxValue = 100;
+    int *arr = genRandArray(size, maxValue);
+    printArray(arr, size);
+    delete [] arr; 
 }
