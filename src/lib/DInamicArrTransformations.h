@@ -12,4 +12,4 @@ int** genRandMatrix(int size, int maxValue);
 
 void printMatrix(int** matrix, int size);
 
-#endif
+#endif //  GEN_RAND_ARRAY_H_
