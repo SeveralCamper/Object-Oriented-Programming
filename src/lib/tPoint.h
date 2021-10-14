@@ -60,8 +60,8 @@ class tCircle : public tPoint {
 
     tCircle(float x, float y, sf::Color color) {
         shape = new sf::CircleShape(50);
-        this->setColor(color);
         shape->setPosition(x, y);
+        this->setColor(color);
         float defaultDirection = randFloat(1, 4 * M_PI);
         direction = sf::Vector2f(cos(defaultDirection), sin(defaultDirection));
     }
@@ -78,8 +78,9 @@ class tTriangle : public tPoint {
 
     tTriangle(float x, float y, sf::Color color) {
         shape = new sf::CircleShape(100,3);
-        this->setColor(color);
+        shape->setOrigin(shape->getPosition().x + 50, shape->getPosition().y + 50);
         shape->setPosition(x, y);
+        this->setColor(color);
         float defaultDirection = randFloat(1, 4 * M_PI);
         direction = sf::Vector2f(cos(defaultDirection), sin(defaultDirection));
     }
@@ -96,8 +97,9 @@ class tRectangle : public tPoint {
 
     tRectangle(float x, float y, sf::Color color) {
         shape = new sf::RectangleShape(sf::Vector2f(120, 50));
-        this->setColor(color);
+        shape->setOrigin(shape->getPosition().x + 60, shape->getPosition().y + 25);
         shape->setPosition(x, y);
+        this->setColor(color);
         float defaultDirection = randFloat(1, 4 * M_PI);
         direction = sf::Vector2f(cos(defaultDirection), sin(defaultDirection));
     }
@@ -114,8 +116,10 @@ class tEllips : public tPoint {
 
     tEllips(float x, float y, sf::Color color) {
         shape = new sf::CircleShape(50);
-        this->setColor(color);
+        shape->setOrigin(shape->getPosition().x + 50, shape->getPosition().y + 50);
         shape->setPosition(x, y);
+        shape->setScale(2, 1);
+        this->setColor(color);
         float defaultDirection = randFloat(1, 4 * M_PI);
         direction = sf::Vector2f(cos(defaultDirection), sin(defaultDirection));
     }
@@ -158,7 +162,5 @@ class tRomb : public tPoint {
         direction = sf::Vector2f(cos(defaultDirection), sin(defaultDirection));
     }
 };
-
-
 
 #endif //  T_POINT_H_
