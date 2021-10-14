@@ -53,27 +53,21 @@ int main() {
 
             circle.randomMovmentPattern(choice);
 			window.draw(*circle.getDrawShape());
-			circle.setPosition();
 
 			rect.randomMovmentPattern(choice);
 			window.draw(*rect.getDrawShape());
-			rect.setPosition();
 
 			trian.randomMovmentPattern(choice);
 			window.draw(*trian.getDrawShape());
-			trian.setPosition();
 
 			ellips.randomMovmentPattern(choice);
 			window.draw(*ellips.getDrawShape());
-			ellips.setPosition();
 
 			romb.randomMovmentPattern(choice);
 			window.draw(*romb.getDrawShape());
-			romb.setPosition();
 
 			line.randomMovmentPattern(choice);
 			window.draw(*line.getDrawShape());
-			line.setPosition();
     }
     window.display();
   }

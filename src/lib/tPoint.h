@@ -19,6 +19,7 @@ class tPoint {
     sf::Shape *getDrawShape();
     
     void setPosition();
+    void rotateFigure();
     void directMovmentPattern(int choice);
     void randomMovmentPattern(int choice);
 
@@ -51,73 +52,111 @@ class tPoint {
 class tCircle : public tPoint {
     public:
 
-    tCircle() {
-        shape = new sf::CircleShape(50);
-        shape->setFillColor(color);
-    }
+    tCircle()
+      : tCircle(rand() % 550 + FIELD_BOARDS, rand() % 550 + FIELD_BOARDS, sf::Color(rand() % 255, rand() % 255, 
+        rand() % 255)){};
 
     private:
+
+    tCircle(float x, float y, sf::Color color) {
+        shape = new sf::CircleShape(50);
+        this->setColor(color);
+        shape->setPosition(x, y);
+        float defaultDirection = randFloat(1, 4 * M_PI);
+        direction = sf::Vector2f(cos(defaultDirection), sin(defaultDirection));
+    }
 };
 
 class tTriangle : public tPoint {
     public:
 
-    tTriangle() {
-        shape = new sf::CircleShape(100,3);
-		shape->setFillColor(color);
-    }
+    tTriangle()
+      : tTriangle(rand() % 550 + FIELD_BOARDS, rand() % 550 + FIELD_BOARDS, sf::Color(rand() % 255, rand() % 255, 
+        rand() % 255)){};
 
     private:
+
+    tTriangle(float x, float y, sf::Color color) {
+        shape = new sf::CircleShape(100,3);
+        this->setColor(color);
+        shape->setPosition(x, y);
+        float defaultDirection = randFloat(1, 4 * M_PI);
+        direction = sf::Vector2f(cos(defaultDirection), sin(defaultDirection));
+    }
 };
 
 class tRectangle : public tPoint {
     public:
 
-    tRectangle() {
-        shape = new sf::RectangleShape(sf::Vector2f(120, 50));
-		shape->setOrigin(shape->getPosition().x + 60, shape->getPosition().y + 25);
-		shape->setFillColor(color);
-    }
+    tRectangle()
+      : tRectangle(rand() % 550 + FIELD_BOARDS, rand() % 550 + FIELD_BOARDS, sf::Color(rand() % 255, rand() % 255, 
+        rand() % 255)){};
 
     private:
+
+    tRectangle(float x, float y, sf::Color color) {
+        shape = new sf::RectangleShape(sf::Vector2f(120, 50));
+        this->setColor(color);
+        shape->setPosition(x, y);
+        float defaultDirection = randFloat(1, 4 * M_PI);
+        direction = sf::Vector2f(cos(defaultDirection), sin(defaultDirection));
+    }
 };
 
 class tEllips : public tPoint {
     public:
 
-    tEllips() {
-        shape = new sf::CircleShape(50);
-		shape->setFillColor(color);
-		shape->setOrigin(shape->getPosition().x + 50, shape->getPosition().y + 50);
-		shape->setScale(2, 1);
-    }
+    tEllips()
+      : tEllips(rand() % 550 + FIELD_BOARDS, rand() % 550 + FIELD_BOARDS, sf::Color(rand() % 255, rand() % 255, 
+        rand() % 255)){};
 
     private:
+
+    tEllips(float x, float y, sf::Color color) {
+        shape = new sf::CircleShape(50);
+        this->setColor(color);
+        shape->setPosition(x, y);
+        float defaultDirection = randFloat(1, 4 * M_PI);
+        direction = sf::Vector2f(cos(defaultDirection), sin(defaultDirection));
+    }
 };
 
 class tLine : public tPoint {
     public:
 
-    tLine() {
-        shape = new sf::RectangleShape(sf::Vector2f(120, 6));
-		shape->setFillColor(color);
-		shape->setOrigin(shape->getPosition().x + 60, shape->getPosition().y+3);
-    }
+    tLine()
+      : tLine(rand() % 550 + FIELD_BOARDS, rand() % 550 + FIELD_BOARDS, sf::Color(rand() % 255, rand() % 255, 
+        rand() % 255)){};
 
     private:
+
+    tLine(float x, float y, sf::Color color) {
+        shape = new sf::RectangleShape(sf::Vector2f(140, 8));
+        shape->setOrigin(shape->getPosition().x + 70, shape->getPosition().y+4);
+        shape->setPosition(x, y);
+        this->setColor(color);
+        float defaultDirection = randFloat(1, 4 * M_PI);
+        direction = sf::Vector2f(cos(defaultDirection), sin(defaultDirection));
+    }
 };
 
 class tRomb : public tPoint {
     public:
 
-    tRomb() {
-        shape = new sf::CircleShape(50, 4);
-		shape->setFillColor(color);
-		shape->setOrigin(shape->getPosition().x + 25, shape->getPosition().y + 2);
-		shape->setScale(2, 1);
-    }
+    tRomb()
+      : tRomb(rand() % 550 + FIELD_BOARDS, rand() % 550 + FIELD_BOARDS, sf::Color(rand() % 255, rand() % 255, 
+        rand() % 255)){};
 
     private:
+
+    tRomb(float x, float y, sf::Color color) {
+        shape = new sf::CircleShape(60, 4);
+        shape->setOrigin(shape->getPosition().x + 30, shape->getPosition().y + 2);
+        shape->setPosition(x, y);
+        this->setColor(color);
+        float defaultDirection = randFloat(1, 4 * M_PI);
+        direction = sf::Vector2f(cos(defaultDirection), sin(defaultDirection));
+    }
 };
 
 

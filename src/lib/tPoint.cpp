@@ -19,8 +19,12 @@ sf::Shape *tPoint::getDrawShape() {
     return shape;
     }
 
+void tPoint::rotateFigure() {
+
+}
+
 void tPoint::directMovmentPattern(int choice) {
-  if (this->getPosition().x <= 10 || this->getPosition().x >= 590) {
+  if (shape->getPosition().x <= 10 || shape->getPosition().x >= 590) {
     direction.x *= -1;
     if (choice == 4 || choice == 5) {
         this->setColor(sf::Color(rand() % 255, rand() % 255, 
@@ -28,7 +32,7 @@ void tPoint::directMovmentPattern(int choice) {
       }
     }
 
-    if (this->getPosition().y <= 10 || this->getPosition().y >= 590) {
+    if (shape->getPosition().y <= 10 || shape->getPosition().y >= 590) {
       direction.y *= -1;
       if (choice == 4 || choice == 5) {
           this->setColor(sf::Color(rand() % 255, rand() % 255, 
@@ -40,7 +44,7 @@ void tPoint::directMovmentPattern(int choice) {
   }
 
 void tPoint::randomMovmentPattern(int choice) {
-  if (this->getPosition().y < 10) {
+  if (shape->getPosition().y < 10) {
     float newAngle = -randFloat(225, 315) * M_PI/180;
     direction.x = cos(newAngle);
     direction.y = sin(newAngle);
@@ -49,7 +53,7 @@ void tPoint::randomMovmentPattern(int choice) {
       rand() % 255));
     }
   }
-  if (this->getPosition().y > 590) {
+  if (shape->getPosition().y > 590) {
     float newAngle = -randFloat(45, 135) * M_PI/180;
     direction.x = cos(newAngle);
     direction.y = sin(newAngle);
@@ -59,7 +63,7 @@ void tPoint::randomMovmentPattern(int choice) {
     }
   }
 
-  if (this->getPosition().x < 10) {
+  if (shape->getPosition().x < 10) {
     float newAngle = randFloat(-45, 45) * M_PI/180;
     direction.x = cos(newAngle);
     direction.y = sin(newAngle);
@@ -68,7 +72,7 @@ void tPoint::randomMovmentPattern(int choice) {
       rand() % 255));
     }
   }
-  if (this->getPosition().x > 590) {
+  if (shape->getPosition().x > 590) {
     float newAngle = randFloat(135, 225) * M_PI/180;
     direction.x = cos(newAngle);
     direction.y = sin(newAngle);
@@ -77,8 +81,8 @@ void tPoint::randomMovmentPattern(int choice) {
       rand() % 255));
     }
   }
-  shape->setPosition(shape->getPosition().x + direction.x * moveSpeed,
-    shape->getPosition().y + direction.y * moveSpeed);
+  shape->setPosition(this->getPosition().x + direction.x * moveSpeed,
+    this->getPosition().y + direction.y * moveSpeed);
 }
 
 void tPoint::setPosition() {
