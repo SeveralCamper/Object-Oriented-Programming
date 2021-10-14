@@ -19,55 +19,67 @@ sf::CircleShape tPoint::getDrawPoint() {
     return point;
     }
 
-void tPoint::directMovmentPattern() {
+void tPoint::directMovmentPattern(int choice) {
     if (this->getPosition().x <= 10 || this->getPosition().x >= 590) {
       direction.x *= -1;
-      this->setColor(sf::Color(rand() % 255, rand() % 255, 
+      if (choice == 4) {
+          this->setColor(sf::Color(rand() % 255, rand() % 255, 
         rand() % 255));
+      }
     }
 
     if (this->getPosition().y <= 10 || this->getPosition().y >= 590) {
       direction.y *= -1;
-      this->setColor(sf::Color(rand() % 255, rand() % 255, 
+      if (choice == 4) {
+          this->setColor(sf::Color(rand() % 255, rand() % 255, 
         rand() % 255));
+      }
     }
     this->setPosition(this->getPosition().x + direction.x * moveSpeed,
         this->getPosition().y + direction.y * moveSpeed);
   }
 
-void tPoint::randomMovmentPattern() {
+void tPoint::randomMovmentPattern(int choice) {
     if (this->getPosition().y < 10) {
         float newAngle = -randFloat(225, 315) * M_PI/180;
       direction.x = cos(newAngle);
       direction.y = sin(newAngle);
-      this->setColor(sf::Color(rand() % 255, rand() % 255, 
+      if (choice == 3) {
+          this->setColor(sf::Color(rand() % 255, rand() % 255, 
         rand() % 255));
+      }
     }
     if (this->getPosition().y > 590) {
         float newAngle = -randFloat(45, 135) * M_PI/180;
       direction.x = cos(newAngle);
       direction.y = sin(newAngle);
-      this->setColor(sf::Color(rand() % 255, rand() % 255, 
+      if (choice == 3) {
+          this->setColor(sf::Color(rand() % 255, rand() % 255, 
         rand() % 255));
+      }
     }
 
     if (this->getPosition().x < 10) {
         float newAngle = randFloat(-45, 45) * M_PI/180;
       direction.x = cos(newAngle);
       direction.y = sin(newAngle);
-      this->setColor(sf::Color(rand() % 255, rand() % 255, 
+      if (choice == 3) {
+          this->setColor(sf::Color(rand() % 255, rand() % 255, 
         rand() % 255));
+      }
     }
     if (this->getPosition().x > 590) {
         float newAngle = randFloat(135, 225) * M_PI/180;
       direction.x = cos(newAngle);
       direction.y = sin(newAngle);
-      this->setColor(sf::Color(rand() % 255, rand() % 255, 
+      if (choice == 3) {
+          this->setColor(sf::Color(rand() % 255, rand() % 255, 
         rand() % 255));
+      }
     }
     this->setPosition(this->getPosition().x + direction.x * moveSpeed,
         this->getPosition().y + direction.y * moveSpeed);
-} 
+}
 
 void tPoint::setPosition(float x, float y) {
     point.setPosition(sf::Vector2f(x, y));

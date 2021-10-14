@@ -22,8 +22,8 @@ class tPoint {
 
     sf::CircleShape getDrawPoint();
 
-    void directMovmentPattern();
-    void randomMovmentPattern();
+    void directMovmentPattern(int choice);
+    void randomMovmentPattern(int choice);
 
     float randFloat(float firstNum, float secondNum);
 
