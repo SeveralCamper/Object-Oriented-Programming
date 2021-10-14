@@ -10,11 +10,12 @@ int main() {
     std::cout << "2. Direct movement" << std::endl;
     std::cout << "3. Random movement with color change" << std::endl;
     std::cout << "4. Direct movement with color change" << std::endl;
-    std::cout << "5. A lof of figures" << std::endl;
+    std::cout << "5. Fireworks movment" << std::endl;
+    std::cout << "6. A lof of figures" << std::endl;
     int choice = 0;
     char c;
 
-    if((scanf("%d%c", &choice, &c) == 2) && (choice < 6 && choice > 0) && (c == '\n') ) {
+    if((scanf("%d%c", &choice, &c) == 2) && (choice < 7 && choice > 0) && (c == '\n') ) {
 
         sf::RenderWindow window(sf::VideoMode(600, 600), "Point moving");
         window.setVerticalSyncEnabled(true);
@@ -28,7 +29,7 @@ int main() {
 
         tRectangle rect;
         tCircle circle;
-        tTriangle trian;
+        tTriangle train;
         tEllips ellips;
         tRomb romb;
         tLine line;
@@ -40,7 +41,7 @@ int main() {
                     window.close();
             }
             window.clear();
-            if (choice > 0 && choice < 5) {
+            if (choice > 0 && choice < 6) {
                 for (int i = 0; i < 100; i++) {
                     if(choice == 1) {
                         points[i].randomMovmentPattern(choice);
@@ -50,19 +51,23 @@ int main() {
                         points[i].randomMovmentPattern(choice);
                     } else if (choice == 4) {
                         points[i].directMovmentPattern(choice);
+                    } else if (choice == 5) {
+                        points[i].fireworksPattern(choice);
                     }
                     window.draw(*points[i].getDrawShape());
                 }
-            } else if (choice == 5) {
+            } else if (choice == 6) {
 
                 circle.randomMovmentPattern(choice);
                 window.draw(*circle.getDrawShape());
 
                 rect.randomMovmentPattern(choice);
+                rect.rotateShape();
                 window.draw(*rect.getDrawShape());
 
-                trian.randomMovmentPattern(choice);
-                window.draw(*trian.getDrawShape());
+                train.randomMovmentPattern(choice);
+                train.rotateShape();
+                window.draw(*train.getDrawShape());
 
                 ellips.randomMovmentPattern(choice);
                 window.draw(*ellips.getDrawShape());
@@ -70,7 +75,7 @@ int main() {
                 romb.randomMovmentPattern(choice);
                 window.draw(*romb.getDrawShape());
 
-                line.randomMovmentPattern(choice);
+                line.rotateShape();
                 window.draw(*line.getDrawShape());
             }
         window.display();

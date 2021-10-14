@@ -19,13 +19,14 @@ class tPoint {
     sf::Shape *getDrawShape();
     
     void setPosition();
-    void rotateFigure();
+    void rotateShape();
+     void fireworksPattern(int choice);
     void directMovmentPattern(int choice);
     void randomMovmentPattern(int choice);
 
-    float randFloat(float firstNum, float secondNum);
-
     protected:
+        float randFloat(float firstNum, float secondNum);
+
         tPoint(float x, float y, sf::Color color) {
             shape = new sf::CircleShape(2);
             this->setColor(color);
@@ -78,7 +79,7 @@ class tTriangle : public tPoint {
 
     tTriangle(float x, float y, sf::Color color) {
         shape = new sf::CircleShape(100,3);
-        shape->setOrigin(shape->getPosition().x + 50, shape->getPosition().y + 50);
+        shape->setOrigin(shape->getPosition().x + 100, shape->getPosition().y + 100);
         shape->setPosition(x, y);
         this->setColor(color);
         float defaultDirection = randFloat(1, 4 * M_PI);
@@ -136,7 +137,7 @@ class tLine : public tPoint {
 
     tLine(float x, float y, sf::Color color) {
         shape = new sf::RectangleShape(sf::Vector2f(140, 8));
-        shape->setOrigin(shape->getPosition().x + 70, shape->getPosition().y+4);
+        shape->setOrigin(shape->getPosition().x + 70, shape->getPosition().y + 4);
         shape->setPosition(x, y);
         this->setColor(color);
         float defaultDirection = randFloat(1, 4 * M_PI);

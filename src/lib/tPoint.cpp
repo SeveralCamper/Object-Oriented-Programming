@@ -19,10 +19,6 @@ sf::Shape *tPoint::getDrawShape() {
     return shape;
     }
 
-void tPoint::rotateFigure() {
-
-}
-
 void tPoint::directMovmentPattern(int choice) {
   if (shape->getPosition().x <= 10 || shape->getPosition().x >= 590) {
     direction.x *= -1;
@@ -41,6 +37,28 @@ void tPoint::directMovmentPattern(int choice) {
     }
     shape->setPosition(this->getPosition().x + direction.x * moveSpeed,
         this->getPosition().y + direction.y * moveSpeed);
+  }
+
+ void tPoint::fireworksPattern(int choice) {
+  if (shape->getPosition().x <= 10 || shape->getPosition().x >= 590) {
+    direction.x *= -1;
+    if (choice == 4 || choice == 5) {
+        this->setColor(sf::Color(rand() % 255, rand() % 255, 
+          rand() % 255));
+      }
+    }
+
+    if (shape->getPosition().y <= 10 || shape->getPosition().y >= 590) {
+      direction.y *= -1;
+      if (choice == 4 || choice == 5) {
+          this->setColor(sf::Color(rand() % 255, rand() % 255, 
+        rand() % 255));
+      }
+    }
+    shape->setPosition(this->getPosition().x + direction.x * moveSpeed,
+        this->getPosition().y + direction.y * moveSpeed);
+    shape->setOrigin(shape->getPosition().x - 275, shape->getPosition().y - 275);
+    shape->rotate(2);
   }
 
 void tPoint::randomMovmentPattern(int choice) {
@@ -83,6 +101,10 @@ void tPoint::randomMovmentPattern(int choice) {
   }
   shape->setPosition(this->getPosition().x + direction.x * moveSpeed,
     this->getPosition().y + direction.y * moveSpeed);
+}
+
+void tPoint::rotateShape() {
+  shape->rotate(moveSpeed);
 }
 
 void tPoint::setPosition() {
