@@ -9,6 +9,7 @@ int main() {
     std::cout << "2. Direct movement" << std::endl;
     std::cout << "3. Random movement with color change" << std::endl;
     std::cout << "4. Direct movement with color change" << std::endl;
+    std::cout << "5. A lof of figures" << std::endl;
     int choice = 0;
     std::cin >> choice;
 
@@ -17,10 +18,17 @@ int main() {
     window.setFramerateLimit(60);
 	srand(time(NULL));
     tPoint points[100];
-    for (int i = 0; i < 100; i++) {
-        points[i] = tPoint();
-    }
-    
+        for (int i = 0; i < 100; i++) {
+            points[i] = tPoint();
+        }
+
+    tRectangle rect;
+            tCircle circle;
+            tTriangle trian;
+            tEllips ellips;
+            tRomb romb;
+            tLine line;
+            
 	while (window.isOpen()) {
 		sf::Event event;
 		while (window.pollEvent(event)) {
@@ -28,17 +36,44 @@ int main() {
 				window.close();
 		}
 		window.clear();
-		for (int i = 0; i < 100; i++) {
-      if(choice == 1) {
-          points[i].randomMovmentPattern(choice);
-       } else if (choice == 2) {
-           points[i].directMovmentPattern(choice);
-       } else if (choice == 3) {
-           points[i].randomMovmentPattern(choice);
-       } else if (choice == 4) {
-           points[i].directMovmentPattern(choice);
-       }
-      window.draw(points[i].getDrawPoint());
+        if (choice > 0 && choice < 5) {
+            for (int i = 0; i < 100; i++) {
+                if(choice == 1) {
+                    points[i].randomMovmentPattern(choice);
+                } else if (choice == 2) {
+                    points[i].directMovmentPattern(choice);
+                } else if (choice == 3) {
+                    points[i].randomMovmentPattern(choice);
+                } else if (choice == 4) {
+                    points[i].directMovmentPattern(choice);
+                }
+                window.draw(*points[i].getDrawShape());
+            }
+        } else if (choice == 5) {
+
+            circle.randomMovmentPattern(choice);
+			window.draw(*circle.getDrawShape());
+			circle.setPosition();
+
+			rect.randomMovmentPattern(choice);
+			window.draw(*rect.getDrawShape());
+			rect.setPosition();
+
+			trian.randomMovmentPattern(choice);
+			window.draw(*trian.getDrawShape());
+			trian.setPosition();
+
+			ellips.randomMovmentPattern(choice);
+			window.draw(*ellips.getDrawShape());
+			ellips.setPosition();
+
+			romb.randomMovmentPattern(choice);
+			window.draw(*romb.getDrawShape());
+			romb.setPosition();
+
+			line.randomMovmentPattern(choice);
+			window.draw(*line.getDrawShape());
+			line.setPosition();
     }
     window.display();
   }
