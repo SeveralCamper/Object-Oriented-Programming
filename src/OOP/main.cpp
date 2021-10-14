@@ -3,42 +3,41 @@
 #include "../lib/dinamicArrTransformations.h"
 #include "../lib/tPoint.h"
 
-int main()
-{
-    tPoint point(10, 10);
-    point.printCoord();
+int main() {
+    std::cout << "Select a motion pattern" << std::endl;
+    std::cout << "1. Direct motion" << std::endl;
+    std::cout << "2. Random motion" << std::endl;
+    std::cout << "3. Direct motion with random color change" << std::endl;
+    std::cout << "4. Random motion with random color change" << std::endl;
+    int choice = 0;
+    std::cin >> choice;
 
-    sf::RenderWindow window(sf::VideoMode(200, 200), "Lesson 1. kychka-pc.ru");
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
- 
-	while (window.isOpen())
-	{
+    sf::RenderWindow window(sf::VideoMode(600, 600), "Random Point moving");
+    window.setVerticalSyncEnabled(true);
+    window.setFramerateLimit(60);
+	srand(time(NULL));
+    tPoint points[100];
+    for (int i = 0; i < 100; i++) {
+        points[i] = tPoint();
+    }
+    
+	while (window.isOpen()) {
 		sf::Event event;
-		while (window.pollEvent(event))
-		{
+		while (window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
- 
 		window.clear();
-		window.draw(shape);
-		window.display();
-	}
-
-    std::cout << "First ex. - Dinamic Array\n";
-    int size = rand() % 10;
-    int maxValue = 100;
-    int* arr = genRandArray(size, maxValue);
-    printArray(arr, size);
-    delete[] arr;
-    std::cout << "\n";
-
-    std::cout << "Second ex. - Dinamic Matrix\n";
-    size = rand() % 10 + 1;
-    int** matrix = genRandMatrix(size, maxValue);
-    printMatrix(matrix, size);
-    for (int i = 0; i < size; i++) {
-        delete[] matrix[i];
+		for (int i = 0; i < 100; i++) {
+      if(choice == 1) {
+          points[i].directMovmentPattern();
+       } else if (choice == 0) {
+           points[i].randomMovmentPattern();
+       }
+      window.draw(points[i].getDrawPoint());
     }
+    window.display();
+  }
+
+  return 0;
 }

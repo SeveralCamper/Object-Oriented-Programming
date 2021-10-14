@@ -5,34 +5,48 @@
 #include <iostream>
 #include <cmath>
 #include <random>
+#include <SFML/Graphics.hpp>
+
+#define FIELD_BOARDS 10
 
 class tPoint {
     public:
 
-    tPoint() {
-        xCoord = 0;
-        yCoord = 0;
-    }
-
-    tPoint(float xCoord, float yCoord) {
-        setxCoord(xCoord);
-        setyCoord(yCoord);
-    }
+    tPoint()
+      : tPoint(rand() % 550 + FIELD_BOARDS, rand() % 550 + FIELD_BOARDS, sf::Color(rand() % 255, rand() % 255, 
+        rand() % 255)){};
 
     ~tPoint() {
 
     }
 
-    float getxCoord();
-    void setxCoord(float valueX);
+    sf::CircleShape getDrawPoint();
 
-    float getyCoord();
-    void setyCoord(float valueY);
+    void directMovmentPattern();
+    void randomMovmentPattern();
 
-    void printCoord();
+    float randFloat(float firstNum, float secondNum);
 
     private:
-        float xCoord, yCoord;
+        tPoint(float x, float y, sf::Color color) {
+            point = sf::CircleShape(1);
+            this->setPosition(x, y);
+            this->setColor(color);
+            float defaultDirection = randFloat(1, 4 * M_PI);
+            direction = sf::Vector2f(cos(defaultDirection), sin(defaultDirection));
+        }
+
+        sf::Color getColor();
+        sf::Vector2f getPosition();
+
+        void printCoord();
+        void setColor(sf::Color color);
+        void setPosition(float x, float y);
+
+        sf::CircleShape point;
+        sf::Vector2f direction;
+        float moveSpeed = 5;
+        float defaultDirection;
 };
 
 #endif //  T_POINT_H_
