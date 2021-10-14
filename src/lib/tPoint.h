@@ -3,35 +3,33 @@
 
 #include <iomanip>
 #include <iostream>
+#include <cmath>
+#include <random>
 
 class tPoint {
     public:
 
-    float getxCoord() {
-        return xCoord;
+    tPoint() {
+        xCoord = 0;
+        yCoord = 0;
     }
 
-    void setxCoord(float valueX) {
-        xCoord = valueX;
+    tPoint(float xCoord, float yCoord) {
+        setxCoord(xCoord);
+        setyCoord(yCoord);
     }
 
-    float getyCoord() {
-        return yCoord;
+    ~tPoint() {
+
     }
 
-    void setyCoord(float valueY) {
-        yCoord = valueY;
-    }
+    float getxCoord();
+    void setxCoord(float valueX);
 
-    tPoint(float valueX, float valueY) {
-        setxCoord(valueX);
-        setyCoord(valueY);
-    }
+    float getyCoord();
+    void setyCoord(float valueY);
 
-    void printCoord() {
-        std::cout << getxCoord() << std::endl;
-        std::cout << getyCoord() << std::endl;
-    }
+    void printCoord();
 
     private:
         float xCoord, yCoord;

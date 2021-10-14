@@ -1,4 +1,4 @@
-#include "DInamicArrTransformations.h"
+#include "dinamicArrTransformations.h"
 
 int* genRandArray(int size, int maxValue)
 {

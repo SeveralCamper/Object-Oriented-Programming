@@ -1,8 +1,31 @@
-#include <DInamicArrTransformations.h>
 #include <iostream>
+#include <SFML/Graphics.hpp>
+#include "../lib/dinamicArrTransformations.h"
+#include "../lib/tPoint.h"
 
 int main()
 {
+    tPoint point(10, 10);
+    point.printCoord();
+
+    sf::RenderWindow window(sf::VideoMode(200, 200), "Lesson 1. kychka-pc.ru");
+	sf::CircleShape shape(100.f);
+	shape.setFillColor(sf::Color::Green);
+ 
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
+ 
+		window.clear();
+		window.draw(shape);
+		window.display();
+	}
+
     std::cout << "First ex. - Dinamic Array\n";
     int size = rand() % 10;
     int maxValue = 100;
