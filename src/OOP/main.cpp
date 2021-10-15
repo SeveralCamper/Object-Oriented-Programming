@@ -14,6 +14,7 @@ int main() {
     std::cout << "6. A lof of figures" << std::endl;
     int choice = 0;
     char c;
+    std::cout << "branch" << std::endl;
 
     if((scanf("%d%c", &choice, &c) == 2) && (choice < 7 && choice > 0) && (c == '\n') ) {
 
