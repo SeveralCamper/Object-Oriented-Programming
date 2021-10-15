@@ -20,8 +20,8 @@ class tPoint {
     
     void setPosition();
     void rotateShape();
-     void fireworksPattern(int choice);
-    void directMovmentPattern(int choice);
+    void fireworksPattern(int choice);
+    virtual void directMovmentPattern(int choice);
     void randomMovmentPattern(int choice);
 
     protected:
@@ -57,6 +57,48 @@ class tCircle : public tPoint {
       : tCircle(rand() % 550 + FIELD_BOARDS, rand() % 550 + FIELD_BOARDS, sf::Color(rand() % 255, rand() % 255, 
         rand() % 255)){};
 
+    void directMovmentPattern(int choice) override {
+        if (shape->getPosition().y < 10) {
+            float newAngle = -randFloat(215, 325) * M_PI/180;
+            direction.x = cos(newAngle);
+            direction.y = sin(newAngle);
+            if (choice == 3 || choice == 5) {
+            this->setColor(sf::Color(rand() % 255, rand() % 255, 
+            rand() % 255));
+            }
+        }
+        if (shape->getPosition().y > 590) {
+            float newAngle = -randFloat(35, 145) * M_PI/180;
+            direction.x = cos(newAngle);
+            direction.y = sin(newAngle);
+            if (choice == 3 || choice == 5) {
+            this->setColor(sf::Color(rand() % 255, rand() % 255, 
+            rand() % 255));
+            }
+        }
+
+        if (shape->getPosition().x < 10) {
+            float newAngle = randFloat(-35, 35) * M_PI/180;
+            direction.x = cos(newAngle);
+            direction.y = sin(newAngle);
+            if (choice == 3 || choice == 5) {
+            this->setColor(sf::Color(rand() % 255, rand() % 255, 
+            rand() % 255));
+            }
+        }
+        if (shape->getPosition().x > 590) {
+            float newAngle = randFloat(125, 245) * M_PI/180;
+            direction.x = cos(newAngle);
+            direction.y = sin(newAngle);
+            if (choice == 3 || choice == 5) {
+            this->setColor(sf::Color(rand() % 255, rand() % 255, 
+            rand() % 255));
+            }
+        }
+        shape->setPosition(this->getPosition().x + direction.x * moveSpeed,
+            this->getPosition().y + direction.y * moveSpeed); 
+        }
+
     private:
 
     tCircle(float x, float y, sf::Color color) {
@@ -74,6 +116,28 @@ class tTriangle : public tPoint {
     tTriangle()
       : tTriangle(rand() % 550 + FIELD_BOARDS, rand() % 550 + FIELD_BOARDS, sf::Color(rand() % 255, rand() % 255, 
         rand() % 255)){};
+
+    void directMovmentPattern(int choice) override {
+        if (shape->getPosition().x <= 10 || shape->getPosition().x >= 590) {
+            direction.x *= -1;
+            if (choice == 4 || choice == 5) {
+                this->setColor(sf::Color(rand() % 255, rand() % 255, 
+                rand() % 255));
+                }
+            }
+
+            if (shape->getPosition().y <= 10 || shape->getPosition().y >= 590) {
+            direction.y *= -1;
+            if (choice == 4 || choice == 5) {
+                this->setColor(sf::Color(rand() % 255, rand() % 255, 
+                rand() % 255));
+                }
+            }
+            shape->setPosition(this->getPosition().x + direction.x * moveSpeed,
+                this->getPosition().y + direction.y * moveSpeed);
+            shape->setOrigin(shape->getPosition().x - 275, shape->getPosition().y - 275);
+            shape->rotate(2);       
+        }
 
     private:
 
@@ -113,6 +177,48 @@ class tEllips : public tPoint {
       : tEllips(rand() % 550 + FIELD_BOARDS, rand() % 550 + FIELD_BOARDS, sf::Color(rand() % 255, rand() % 255, 
         rand() % 255)){};
 
+    void directMovmentPattern(int choice) override {
+        if (shape->getPosition().y < 10) {
+            float newAngle = -randFloat(215, 325) * M_PI/180;
+            direction.x = cos(newAngle);
+            direction.y = sin(newAngle);
+            if (choice == 3 || choice == 5) {
+            this->setColor(sf::Color(rand() % 255, rand() % 255, 
+            rand() % 255));
+            }
+        }
+        if (shape->getPosition().y > 590) {
+            float newAngle = -randFloat(35, 145) * M_PI/180;
+            direction.x = cos(newAngle);
+            direction.y = sin(newAngle);
+            if (choice == 3 || choice == 5) {
+            this->setColor(sf::Color(rand() % 255, rand() % 255, 
+            rand() % 255));
+            }
+        }
+
+        if (shape->getPosition().x < 10) {
+            float newAngle = randFloat(-35, 35) * M_PI/180;
+            direction.x = cos(newAngle);
+            direction.y = sin(newAngle);
+            if (choice == 3 || choice == 5) {
+            this->setColor(sf::Color(rand() % 255, rand() % 255, 
+            rand() % 255));
+            }
+        }
+        if (shape->getPosition().x > 590) {
+            float newAngle = randFloat(125, 245) * M_PI/180;
+            direction.x = cos(newAngle);
+            direction.y = sin(newAngle);
+            if (choice == 3 || choice == 5) {
+            this->setColor(sf::Color(rand() % 255, rand() % 255, 
+            rand() % 255));
+            }
+        }
+        shape->setPosition(this->getPosition().x + direction.x * moveSpeed,
+            this->getPosition().y + direction.y * moveSpeed);   
+    }
+
     private:
 
     tEllips(float x, float y, sf::Color color) {
@@ -151,6 +257,28 @@ class tRomb : public tPoint {
     tRomb()
       : tRomb(rand() % 550 + FIELD_BOARDS, rand() % 550 + FIELD_BOARDS, sf::Color(rand() % 255, rand() % 255, 
         rand() % 255)){};
+
+    void directMovmentPattern(int choice) override {
+        if (shape->getPosition().x <= 10 || shape->getPosition().x >= 590) {
+            direction.x *= -1;
+            if (choice == 4 || choice == 5) {
+                this->setColor(sf::Color(rand() % 255, rand() % 255, 
+                rand() % 255));
+                }
+            }
+
+            if (shape->getPosition().y <= 10 || shape->getPosition().y >= 590) {
+            direction.y *= -1;
+            if (choice == 4 || choice == 5) {
+                this->setColor(sf::Color(rand() % 255, rand() % 255, 
+                rand() % 255));
+                }
+            }
+            shape->setPosition(this->getPosition().x + direction.x * moveSpeed,
+                this->getPosition().y + direction.y * moveSpeed);
+            shape->setOrigin(shape->getPosition().x - 275, shape->getPosition().y - 275);
+            shape->rotate(2);       
+        }
 
     private:
 
