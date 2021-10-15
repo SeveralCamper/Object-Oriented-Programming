@@ -19,7 +19,7 @@ sf::Shape *tPoint::getDrawShape() {
     return shape;
     }
 
-void tPoint::directMovmentPattern(int choice) {
+void tPoint::directMovmentPattern(int choice = 5) {
   if (shape->getPosition().x <= 10 || shape->getPosition().x >= 590) {
     direction.x *= -1;
     if (choice == 4 || choice == 5) {

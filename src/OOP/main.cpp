@@ -30,6 +30,9 @@ int main() {
         window.clear();
 
         for (int i = 0; i < 7; i++) {
+            if (i % 2 == 0) {
+                shapes[i]->rotateShape();
+            }
         shapes[i]->directMovmentPattern(5);
         shapes[i]->directMovmentPattern(5);
         }

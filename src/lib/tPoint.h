@@ -28,7 +28,7 @@ class tPoint {
         float randFloat(float firstNum, float secondNum);
 
         tPoint(float x, float y, sf::Color color) {
-            shape = new sf::CircleShape(2);
+            shape = new sf::CircleShape(5);
             this->setColor(color);
             shape->setPosition(x, y);
             float defaultDirection = randFloat(1, 4 * M_PI);
