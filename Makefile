@@ -1,12 +1,12 @@
-CFLAGS := -Wall -Werror -std=c++17
-CPPFLAGS := -MMD
+CFLAGS := -Wall -Werror -Wextra -std=c++17
 CXX := g++
 
-TARGET := bin/OOP
+TARGET1 := bin/virtual
+TARGET2 := bin/inheritance
 
 LIBS= -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system 
 
-SOURCES := $(wildcard src/OOP/main.cpp)
+SOURCES := $(src/OOP/main.cpp)
 LIBSOURCES := $(wildcard src/lib/*.cpp)
 
 LIBOBJ := $(patsubst src/lib/%.cpp, obj/src/%.o, $(LIBSOURCES))
@@ -14,22 +14,35 @@ LIB := obj/lib/functionLib.a
 
 OBJ := $(patsubst src/OOP/%.cpp, obj/src/%.o, $(SOURCES))
 
-all:$(TARGET)
+all: virtual inheritance
 
-$(TARGET): $(LIB) $(MLIB) $(OBJ)
-	$(CXX) $(CFLAGS) $(CPPFLAGS) -o $(TARGET) $(OBJ) -L. $(LIB) $(LIBS)
+virtual: $(TARGET1)
 
-$(LIB): $(LIBOBJ)
-	ar rcs $@ $^
+$(TARGET1): obj/src/main.o obj/src/virtualtPoint.o obj/src/tPoint.o
+	$(CXX) obj/src/main.o obj/src/virtualtPoint.o obj/src/tPoint.o -o $(TARGET1) $(LIBS)
 
-obj/src/%.o: src/lib/%.cpp
-	$(CXX) $(CPPFLAGS) $(CFLAGS) -c $< -o $@ $(LIBS)  -I src/lib
+obj/src/main.o: src/OOP/main.cpp
+	$(CXX) $(CFLAGS) -c $(LIBS) -c -DVIRTUAL src/OOP/main.cpp -o obj/src/main.o
 
-obj/src/%.o: src/OOP/%.cpp
-	$(CXX) $(CPPFLAGS) $(CFLAGS) -c $< -o $@ $(LIBS)  -Isrc/lib
+obj/src/virtualtPoint.o: src/lib/virtualtPoint.cpp
+	$(CXX) $(CFLAGS) -c $(LIBS) src/lib/virtualtPoint.cpp -o obj/src/virtualtPoint.o
+
+obj/src/tPoint.o: src/lib/tPoint.cpp
+	$(CXX) $(CFLAGS) -c $(LIBS) src/lib/tPoint.cpp -o obj/src/tPoint.o
+
+inheritance: $(TARGET2)
+
+$(TARGET2): obj/src/main.o obj/src/tPoint.o
+	$(CXX) obj/src/main.o obj/src/tPoint.o -o $(TARGET2) $(LIBS)
+
+obj/src/main.o: src/OOP/main.cpp
+	$(CXX) $(CFLAGS) -c $(LIBS) -c -DINHERITANCE src/OOP/main.cpp -o obj/src/main.o
+
+obj/src/tPoint.o: src/lib/tPoint.cpp
+	$(CXX) $(CFLAGS) -c $(LIBS) src/lib/tPoint.cpp -o obj/src/tPoint.o
 
 run: $(TARGET)
-	./bin/OOP
+	./bin/virtual
 
 
 clean:
