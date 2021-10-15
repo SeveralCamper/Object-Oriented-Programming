@@ -50,6 +50,7 @@ clean:
 	find . -name "*.d" -exec rm '{}' \;
 	find . -name "*.a" -exec rm '{}' \;
 	find ./bin -type f -name "OOP" -exec rm -f '{}' \;
+	find ./bin -type f -name "virtual" -exec rm -f '{}' \;
 
 format:
 	cd src; find . -name "*.cpp" -exec clang-format -i {} \;

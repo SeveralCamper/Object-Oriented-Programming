@@ -91,47 +91,40 @@ int main() {
     }
     #endif
 
-    #ifdef INHERITANCE
+    #ifdef VIRTUAL
     sf::RenderWindow window(sf::VideoMode(600, 600), "Point moving");
-        window.setVerticalSyncEnabled(true);
-        window.setFramerateLimit(60);
-        srand(time(NULL));
+    window.setVerticalSyncEnabled(true);
+    window.setFramerateLimit(60);
+    srand(time(NULL));
 
-        tRectangle rect;
-        tCircle circle;
-        tTriangle train;
-        tEllips ellips;
-        tRomb romb;
-        tLine line;
+    tPoint **shapes = new tPoint *[7];
+    shapes[0] = new tTriangle();
+    shapes[1] = new tLine();
+    shapes[2] = new tEllips();
+    shapes[3] = new tRectangle();
+    shapes[4] = new tPoint();
+    shapes[5] = new tRomb();
+    shapes[6] = new tCircle();
+                
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+        window.clear();
 
-        while (window.isOpen()) {
-            sf::Event event;
-            while (window.pollEvent(event)) {
-                if (event.type == sf::Event::Closed)
-                    window.close();
-            }
-            window.clear();
-                circle.randomMovmentPattern(choice);
-                window.draw(*circle.getDrawShape());
+        for (int i = 0; i < 7; i++) {
+        shapes[i]->directMovmentPattern(5);
+        shapes[i]->directMovmentPattern(5);
+        }
 
-                rect.randomMovmentPattern(choice);
-                rect.rotateShape();
-                window.draw(*rect.getDrawShape());
-
-                train.randomMovmentPattern(choice);
-                train.rotateShape();
-                window.draw(*train.getDrawShape());
-
-                ellips.randomMovmentPattern(choice);
-                window.draw(*ellips.getDrawShape());
-
-                romb.randomMovmentPattern(choice);
-                window.draw(*romb.getDrawShape());
-
-                line.rotateShape();
-                window.draw(*line.getDrawShape());
-            }
+        for (int i = 0; i < 7; i++) {
+        window.draw(*shapes[i]->getDrawShape());
+        }
+            
         window.display();
+        }
         #endif
         return 0;
         }
