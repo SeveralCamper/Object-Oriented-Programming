@@ -1,12 +1,12 @@
-CFLAGS := -Wall -Werror -Wextra -std=c++17
+CFLAGS := -Wall -Werror -std=c++17
+CPPFLAGS := -MMD
 CXX := g++
 
-TARGET1 := bin/virtual
-TARGET2 := bin/inheritance
+TARGET := bin/OOP
 
 LIBS= -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system 
 
-SOURCES := $(src/OOP/main.cpp)
+SOURCES := $(wildcard src/OOP/main.cpp)
 LIBSOURCES := $(wildcard src/lib/*.cpp)
 
 LIBOBJ := $(patsubst src/lib/%.cpp, obj/src/%.o, $(LIBSOURCES))
@@ -14,35 +14,22 @@ LIB := obj/lib/functionLib.a
 
 OBJ := $(patsubst src/OOP/%.cpp, obj/src/%.o, $(SOURCES))
 
-all: virtual inheritance
+all:$(TARGET)
 
-virtual: $(TARGET1)
+$(TARGET): $(LIB) $(MLIB) $(OBJ)
+	$(CXX) $(CFLAGS) $(CPPFLAGS) -o $(TARGET) $(OBJ) -L. $(LIB) $(LIBS)
 
-$(TARGET1): obj/src/main.o obj/src/virtualtPoint.o obj/src/tPoint.o
-	$(CXX) obj/src/main.o obj/src/virtualtPoint.o obj/src/tPoint.o -o $(TARGET1) $(LIBS)
+$(LIB): $(LIBOBJ)
+	ar rcs $@ $^
 
-obj/src/main.o: src/OOP/main.cpp
-	$(CXX) $(CFLAGS) -c $(LIBS) -c -DVIRTUAL src/OOP/main.cpp -o obj/src/main.o
+obj/src/%.o: src/lib/%.cpp
+	$(CXX) $(CPPFLAGS) $(CFLAGS) -c $< -o $@ $(LIBS)  -I src/lib
 
-obj/src/virtualtPoint.o: src/lib/virtualtPoint.cpp
-	$(CXX) $(CFLAGS) -c $(LIBS) src/lib/virtualtPoint.cpp -o obj/src/virtualtPoint.o
-
-obj/src/tPoint.o: src/lib/tPoint.cpp
-	$(CXX) $(CFLAGS) -c $(LIBS) src/lib/tPoint.cpp -o obj/src/tPoint.o
-
-inheritance: $(TARGET2)
-
-$(TARGET2): obj/src/main.o obj/src/tPoint.o
-	$(CXX) obj/src/main.o obj/src/tPoint.o -o $(TARGET2) $(LIBS)
-
-obj/src/main.o: src/OOP/main.cpp
-	$(CXX) $(CFLAGS) -c $(LIBS) -c -DINHERITANCE src/OOP/main.cpp -o obj/src/main.o
-
-obj/src/tPoint.o: src/lib/tPoint.cpp
-	$(CXX) $(CFLAGS) -c $(LIBS) src/lib/tPoint.cpp -o obj/src/tPoint.o
+obj/src/%.o: src/OOP/%.cpp
+	$(CXX) $(CPPFLAGS) $(CFLAGS) -c $< -o $@ $(LIBS)  -Isrc/lib
 
 run: $(TARGET)
-	./bin/virtual
+	./bin/OOP
 
 
 clean:
@@ -50,7 +37,6 @@ clean:
 	find . -name "*.d" -exec rm '{}' \;
 	find . -name "*.a" -exec rm '{}' \;
 	find ./bin -type f -name "OOP" -exec rm -f '{}' \;
-	find ./bin -type f -name "virtual" -exec rm -f '{}' \;
 
 format:
 	cd src; find . -name "*.cpp" -exec clang-format -i {} \;
