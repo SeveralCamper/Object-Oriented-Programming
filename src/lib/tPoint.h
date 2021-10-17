@@ -3,62 +3,60 @@
 
 #include <iomanip>
 #include <iostream>
-#include <cmath>
-#include <random>
+#include <climits>
 #include <SFML/Graphics.hpp>
 
-template <typename T>
+#define MAX_LIST_SIZE 10
+
 class List {
 
 public:
-    template <typename T>
-    List() : head(NULL) {};
+    int structSize = 0;
+    inline static int size = 0;
 
-    template<typename T>
+    List() : head(new Node(INT_MAX)) {
+        size++;
+    }
+
+    List(int value) : head(new Node(INT_MAX)) {
+        head->next = new Node(value);
+        size++;
+    }
+
     ~List() {
-    while(head) {
-        remove();
-        }
-    };
+        if (head->next) clear();
+        delete head;
+        --size;
+    }
 
-    bool equals(const List& other, Node* node) const;
-    bool notEquals(const List& other, Node* node) const;
+    void push(int value);
 
-    void removeNode();
-    void printNodeValue();
-    void moveToNextNode(Node* node);
-    void appendNode(const T& nodeValueAdress);
+    virtual void clear();
 
-    List end() const;
-    List begin() const;
-
-    size_t getSize() const;
-
-    T getHead() const;
-    T getValueNode(Node* node) const;
+    void print();
 
 protected:
-    
     struct Node {
-        Node() : next(NULL) {}
-        Node(const T& nodeValueAdress) : nodeValue(nodeValueAdress), next(NULL) {}
+        Node(int value, Node* next) : value(value), next(next) {}
+        Node(int value) : value(value), next(nullptr) {}
 
-        T nodeValue;
+        int value;
 
         Node* next;
-    };
-    Node* head;
+    }; Node* head;
 };
 
-template <typename T>
-class Steck : public List {
-    
+class Queue : public List {
+public:
+    int pop();
+    void clear() override;
 };
 
-template <typename T>
-class Que : public List {
-
+class Stack : public List {
+public:
+    int pop();
 };
 
+void staticVarCheck();
 
 #endif //  T_POINT_H_
